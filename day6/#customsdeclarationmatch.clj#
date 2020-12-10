@@ -1,0 +1,10 @@
+(require '(clojure set))
+
+(reduce + 
+        (map count
+             (map (fn [sets]
+                    (reduce clojure.set/intersection sets)) 
+                  (map #(map
+                         (fn [answers] (set answers))
+                         (clojure.string/split % #"\n"))
+                       (clojure.string/split (slurp "input") #"\n\n")))))
